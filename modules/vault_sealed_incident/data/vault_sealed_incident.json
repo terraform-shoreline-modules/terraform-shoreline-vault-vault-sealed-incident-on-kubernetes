@@ -3,11 +3,11 @@
   "description": "The Vault Sealed incident type occurs when an instance of the Vault has been sealed due to an error or issue. This can cause disruption to the system and requires immediate attention to resolve the issue and unseal the Vault instance. It is important to identify the root cause of the issue in order to prevent it from happening again in the future.",
   "params": [
     {
-      "name": "VAULT_POD_NAME",
+      "name": "VAULT_CONTAINER_NAME",
       "value": ""
     },
     {
-      "name": "POD_NAME",
+      "name": "VAULT_POD_NAME",
       "value": ""
     },
     {
@@ -15,11 +15,11 @@
       "value": ""
     },
     {
-      "name": "VAULT_CONTAINER_NAME",
+      "name": "NAMESPACE",
       "value": ""
     },
     {
-      "name": "NAMESPACE",
+      "name": "POD_NAME",
       "value": ""
     },
     {
@@ -176,7 +176,7 @@
       "name": "cell_25",
       "type": "OP_LANG",
       "enabled": true,
-      "content": "pod | k8s_cluster_name=$K8S_CLUSTER_NAME | app='shoreline' | random=1 | limit=1 | invoke_vault_status_check($VAULT_POD_NAME, $VAULT_CONTAINER_NAME, $NAMESPACE)"
+      "content": "pod | k8s_cluster_name=$K8S_CLUSTER_NAME | app='shoreline' | random=1 | limit=1 | invoke_check_vault_config($VAULT_CONTAINER_NAME, $VAULT_POD_NAME, $NAMESPACE)"
     },
     {
       "name": "cell_26",
@@ -188,7 +188,7 @@
       "name": "cell_27",
       "type": "OP_LANG",
       "enabled": true,
-      "content": "pod | k8s_cluster_name=$K8S_CLUSTER_NAME | app='shoreline' | random=1 | limit=1 | invoke_vault_unseal($POD_NAME, $VAULT_NAME, $NAMESPACE)"
+      "content": "pod | k8s_cluster_name=$K8S_CLUSTER_NAME | app='shoreline' | random=1 | limit=1 | invoke_unseal_vault($VAULT_NAME, $NAMESPACE, $POD_NAME)"
     }
   ]
 }
